@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>English Quest | Home & Abilities</title>
+<style>
+:root{--navy:#172554;--blue:#2563eb;--cyan:#e0f2fe;--ink:#172033;--muted:#64748b;--paper:#f7f9fc;--line:#dce4ef;--green:#15803d;--red:#b91c1c;--gold:#fbbf24}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(120deg,#172554,#1d4ed8);color:white;padding:22px 18px 18px}
+.top{max-width:980px;margin:auto}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#bfdbfe;font-weight:800}
+h1{font-size:clamp(25px,5vw,38px);margin:5px 0 4px;letter-spacing:-1px}.sub{color:#dbeafe;font-size:14px}
+.progress-wrap{height:7px;background:#ffffff35;border-radius:20px;margin-top:16px;overflow:hidden}.progress{height:100%;width:0;background:#fde68a;transition:width .3s}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px max(12px,calc((100% - 980px)/2));background:white;border-bottom:1px solid var(--line);scrollbar-width:thin}
+.tab{border:1px solid var(--line);background:white;color:#475569;border-radius:12px;padding:10px 14px;font-weight:750;white-space:nowrap;font-size:13px;cursor:pointer}
+.tab.active{background:#eaf2ff;border-color:#93c5fd;color:#1d4ed8}
+main{max-width:980px;margin:22px auto;padding:0 14px 40px}.panel{display:none}.panel.active{display:block}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}.kicker{color:#2563eb;font-size:11px;font-weight:850;letter-spacing:1.6px;text-transform:uppercase}
+h2{font-size:24px;margin:4px 0}.desc{color:var(--muted);font-size:14px;line-height:1.5;margin:0}
+.pill{background:#eff6ff;color:#1d4ed8;padding:7px 10px;border-radius:30px;font-size:12px;font-weight:800;white-space:nowrap}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 5px 18px #1725540a;margin-bottom:14px}
+.words{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.word{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:9px;padding:7px 10px;font-size:13px;font-weight:800}
+.grid-wrap{overflow-x:auto;padding-bottom:5px}.letter-grid{display:grid;grid-template-columns:repeat(12,minmax(24px,1fr));gap:4px;max-width:570px;margin:10px auto;touch-action:none}
+.cell{aspect-ratio:1;border:1px solid #dbeafe;background:#f8fbff;border-radius:6px;font-weight:800;color:#334155;font-size:clamp(12px,2.5vw,16px);cursor:pointer;user-select:none}
+.cell.selected{background:#bfdbfe;border-color:#60a5fa}.cell.found{background:#bbf7d0;border-color:#4ade80;color:#166534}
+.word-list{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}.word-list span{font-size:12px;padding:6px 9px;background:#f1f5f9;border-radius:8px;color:#475569}.word-list .done{text-decoration:line-through;background:#dcfce7;color:#166534}
+.hobby-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hobby{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:center;min-height:126px}
+.art{font-size:38px;display:block;margin-bottom:5px}.drop{border:2px dashed #cbd5e1;border-radius:10px;min-height:38px;padding:8px 5px;color:#94a3b8;font-size:12px;font-weight:750;background:#f8fafc}
+.drop.filled{border-style:solid;border-color:#93c5fd;background:#eff6ff;color:#1e40af}.drop.correct{border-color:#4ade80;background:#dcfce7;color:#166534}.drop.wrong{border-color:#fca5a5;background:#fee2e2;color:#991b1b}
+.bank{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}.chip{background:#172554;color:white;border:0;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:800;cursor:grab;touch-action:none;user-select:none}.chip:active{cursor:grabbing}.chip.used{opacity:.35}.drag-ghost{position:fixed;z-index:99;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 8px 24px #0003}
+.question{padding:13px 0;border-bottom:1px solid #edf1f6}.question:last-child{border:0}.qtitle{font-weight:800;margin-bottom:9px;font-size:14px}.scramble{color:#1d4ed8;background:#eff6ff;padding:9px 11px;border-radius:9px;font-weight:800;line-height:1.6;margin-bottom:8px;letter-spacing:.2px}
+.answer{width:100%;border:1.5px solid #cbd5e1;border-radius:10px;padding:12px;font:inherit;font-size:14px;outline:none}.answer:focus{border-color:#3b82f6;box-shadow:0 0 0 3px #dbeafe}.answer.correct{border-color:#22c55e;background:#f0fdf4}.answer.wrong{border-color:#ef4444;background:#fff7f7}
+.actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:11px;padding:12px 17px;background:#1d4ed8;color:white;font-weight:850;font-size:14px;cursor:pointer}.btn.secondary{background:#eef2f7;color:#334155}.btn:disabled{opacity:.5;cursor:not-allowed}
+.feedback{font-size:13px;font-weight:750;color:var(--muted)}.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}
+.option{display:flex;align-items:center;gap:9px;border:1px solid var(--line);padding:10px;border-radius:10px;margin:7px 0;font-size:14px;cursor:pointer}.option:has(input:checked){background:#eff6ff;border-color:#93c5fd}.option input{accent-color:#2563eb}
+.listen-box{background:linear-gradient(130deg,#eff6ff,#f5f3ff);border:1px solid #dbeafe;border-radius:16px;padding:16px}.play{width:52px;height:52px;border-radius:50%;border:0;background:#1d4ed8;color:white;font-size:21px;cursor:pointer}
+.result{display:none;text-align:center;padding:22px}.result.show{display:block}.score{font-size:42px;font-weight:900;color:#1d4ed8}.tiny{font-size:12px;color:var(--muted);line-height:1.5}
+@media(min-width:650px){.hobby-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.card{padding:20px}.letter-grid{gap:5px}}
+</style></head>
+<body>
+<header><div class="top"><div class="eyebrow">Your interactive English practice</div><h1>English Quest</h1><div class="sub">Home, hobbies & abilities · A1–A2 practice</div><div class="progress-wrap"><div class="progress" id="progress"></div></div></div></header>
+<nav id="tabs">
+<button class="tab active" data-tab="vocab1">01 · Home vocabulary</button>
+<button class="tab" data-tab="grammar1">02 · Fix the mistakes</button>
+<button class="tab" data-tab="vocab2">03 · Hobbies & abilities</button>
+<button class="tab" data-tab="grammar2">04 · There is / are</button>
+<button class="tab" data-tab="listening">05 · Listening</button>
+</nav>
+<main>
+<section class="panel active" id="vocab1">
+<div class="section-head"><div><div class="kicker">Vocabulary · 01</div><h2>Find the home words</h2><p class="desc">Find all 10 words in the letter grid. On a phone or tablet, press a letter and slide your finger across the word, then lift your finger.</p></div><span class="pill">10 points</span></div>
+<div class="card"><div class="words" id="targets"></div><div class="grid-wrap"><div class="letter-grid" id="letterGrid"></div></div><div class="word-list" id="foundList"></div><div class="actions"><button class="btn" id="checkWordsearch">Submit answers</button><span class="feedback" id="wsFeedback">Find the 10 hidden words.</span></div></div>
+<div class="tiny">Word bank: bedroom · bathroom · sofa · fan · fridge · coffee maker · table · mirror · lamp · wardrobe</div>
+</section>
+<section class="panel" id="grammar1">
+<div class="section-head"><div><div class="kicker">Grammar · 02</div><h2>Fix the mistakes</h2><p class="desc">Each sentence has a mistake. Rewrite the complete sentence correctly. Check the verb, can / can’t and prepositions.</p></div><span class="pill">7 points</span></div>
+<div class="card" id="canQuestions"></div><div class="actions"><button class="btn" id="checkCan">Submit answers</button><span class="feedback" id="canFeedback">Take your time. You can do it!</span></div>
+</section>
+<section class="panel" id="vocab2">
+<div class="section-head"><div><div class="kicker">Vocabulary · 03</div><h2>Match the hobby or ability</h2><p class="desc">Drag each word from the word bank to the matching picture. You can drag a word back to the bank to change your answer.</p></div><span class="pill">8 points</span></div>
+<div class="card"><div class="qtitle">WORD BANK</div><div class="bank" id="hobbyBank"></div></div>
+<div class="hobby-grid" id="hobbyGrid"></div>
+<div class="actions"><button class="btn" id="checkHobbies">Submit answers</button><span class="feedback" id="hobbyFeedback">Drag and drop the eight words.</span></div>
+</section>
+<section class="panel" id="grammar2">
+<div class="section-head"><div><div class="kicker">Grammar · 04</div><h2>There is or there are?</h2><p class="desc">The words are mixed up. Put them in the correct order to make complete sentences. Check positive and negative forms.</p></div><span class="pill">7 points</span></div>
+<div class="card" id="thereQuestions"></div><div class="actions"><button class="btn" id="checkThere">Submit answers</button><span class="feedback" id="thereFeedback">Read each sentence carefully.</span></div>
+</section>
+<section class="panel" id="listening">
+<div class="section-head"><div><div class="kicker">Listening · 05</div><h2>A place to live</h2><p class="desc">Listen to the short description. You can play it more than once, then answer the questions.</p></div><span class="pill">5 points</span></div>
+<div class="listen-box"><div style="display:flex;align-items:center;gap:14px"><button class="play" id="playAudio" aria-label="Play listening">▶</button><div><b>Listen to Alex</b><div class="tiny">Tap the play button to hear the recording.</div></div></div></div>
+<div class="card" id="listenQuestions" style="margin-top:14px"></div><div class="actions"><button class="btn" id="checkListen">Submit answers</button><span class="feedback" id="listenFeedback">You are almost there!</span></div>
+</section>
+<div class="card result" id="finalResult"><div class="kicker">Your English Quest result</div><h2>Well done!</h2><div class="score" id="finalScore">0 / 37</div><p id="finalMessage">Keep practising. Every step helps you improve.</p><button class="btn secondary" onclick="location.reload()">Try again</button></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const scores={ws:null,can:null,hobby:null,there:null,listen:null};
+function updateProgress(){let done=Object.values(scores).filter(v=>v!==null).length;$('progress').style.width=(done/5*100)+'%';if(done===5)showFinal()}
+function showFinal(){let total=Object.values(scores).reduce((a,b)=>a+(b||0),0);$('finalScore').textContent=total+' / 37';$('finalMessage').textContent=total>=30?'Excellent work! You are building strong English skills.':total>=22?'Good effort! Review your answers and keep practising.':'Keep going! Review the activities and try again.';$('finalResult').classList.add('show');$('finalResult').scrollIntoView({behavior:'smooth',block:'center'});if(total>=30)coinSound()}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active')}));
+function coinSound(){try{let c=new(window.AudioContext||window.webkitAudioContext)();[880,1175,1568].forEach((f,i)=>{let o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,c.currentTime+i*.09);g.gain.exponentialRampToValueAtTime(.12,c.currentTime+i*.09+.015);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+i*.09+.16);o.connect(g);g.connect(c.destination);o.start(c.currentTime+i*.09);o.stop(c.currentTime+i*.09+.17)})}catch(e){}}
+function feedback(id,text,good){$(id).textContent=text;$(id).className='feedback '+(good?'good':'bad')}
+const homeWords=['BEDROOM','BATHROOM','SOFA','FAN','FRIDGE','COFFEEMAKER','TABLE','MIRROR','LAMP','WARDROBE'];
+let matrix=Array.from({length:12},()=>Array(12).fill('')),placements=[];
+function makeGrid(){homeWords.forEach(word=>{let placed=false;for(let tries=0;tries<300&&!placed;tries++){let dir=Math.random()<.5?[0,1]:[1,0],r=Math.floor(Math.random()*12),c=Math.floor(Math.random()*12);if(r+dir[0]*(word.length-1)>=12||c+dir[1]*(word.length-1)>=12)continue;let ok=true;for(let i=0;i<word.length;i++)if(matrix[r+dir[0]*i][c+dir[1]*i]&&matrix[r+dir[0]*i][c+dir[1]*i]!==word[i])ok=false;if(ok){for(let i=0;i<word.length;i++)matrix[r+dir[0]*i][c+dir[1]*i]=word[i];placements.push({word,r,c,dr:dir[0],dc:dir[1]});placed=true}}});matrix=matrix.map(row=>row.map(x=>x||'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random()*26)]));}
+makeGrid();let first=null,found=new Set(),cellEls=[];
+homeWords.forEach(w=>{let d=document.createElement('span');d.textContent=w==='COFFEEMAKER'?'COFFEE MAKER':w;$('targets').append(d)});
+matrix.forEach((row,r)=>row.forEach((v,c)=>{let b=document.createElement('button');b.className='cell';b.textContent=v;b.dataset.r=r;b.dataset.c=c;b.setAttribute('aria-label',`Row ${r+1}, column ${c+1}, letter ${v}`);$('letterGrid').append(b);cellEls.push(b)}));
+let swipeStart=null,swipeEnd=null,isSwiping=false;
+function cellAtPoint(x,y){let el=document.elementFromPoint(x,y);return el?.closest('.cell')}
+function paintSelection(end){cellEls.forEach(x=>x.classList.remove('selected'));if(!swipeStart||!end)return;let dr=Math.sign(end.r-swipeStart.r),dc=Math.sign(end.c-swipeStart.c);if(dr!==0&&dc!==0)return;let n=Math.max(Math.abs(end.r-swipeStart.r),Math.abs(end.c-swipeStart.c));for(let i=0;i<=n;i++){let el=cellEls.find(x=>+x.dataset.r===swipeStart.r+dr*i&&+x.dataset.c===swipeStart.c+dc*i);el?.classList.add('selected')}}
+function finishSelection(end){if(!swipeStart||!end)return;let dr=Math.sign(end.r-swipeStart.r),dc=Math.sign(end.c-swipeStart.c);if(dr!==0&&dc!==0){cellEls.forEach(x=>x.classList.remove('selected'));swipeStart=null;return}let len=Math.max(Math.abs(end.r-swipeStart.r),Math.abs(end.c-swipeStart.c))+1,letters='';for(let i=0;i<len;i++)letters+=matrix[swipeStart.r+dr*i]?.[swipeStart.c+dc*i]||'';let rev=letters.split('').reverse().join(''),match=homeWords.find(w=>w===letters||w===rev);if(match&&!found.has(match)){found.add(match);for(let i=0;i<len;i++){let el=cellEls.find(x=>+x.dataset.r===swipeStart.r+dr*i&&+x.dataset.c===swipeStart.c+dc*i);el?.classList.add('found')}}cellEls.forEach(x=>x.classList.remove('selected'));swipeStart=null;swipeEnd=null;renderFound()}
+$('letterGrid').addEventListener('pointerdown',e=>{let b=e.target.closest('.cell');if(!b||found.size===10)return;e.preventDefault();isSwiping=true;swipeStart={r:+b.dataset.r,c:+b.dataset.c};swipeEnd=swipeStart;$('letterGrid').setPointerCapture(e.pointerId);paintSelection(swipeEnd)});
+$('letterGrid').addEventListener('pointermove',e=>{if(!isSwiping)return;let b=cellAtPoint(e.clientX,e.clientY);if(b){swipeEnd={r:+b.dataset.r,c:+b.dataset.c};paintSelection(swipeEnd)}});
+$('letterGrid').addEventListener('pointerup',e=>{if(!isSwiping)return;let b=cellAtPoint(e.clientX,e.clientY);if(b)swipeEnd={r:+b.dataset.r,c:+b.dataset.c};finishSelection(swipeEnd);isSwiping=false});
+$('letterGrid').addEventListener('pointercancel',()=>{isSwiping=false;swipeStart=null;cellEls.forEach(x=>x.classList.remove('selected'))});
+
+function renderFound(){$('foundList').innerHTML='';homeWords.forEach(w=>{let s=document.createElement('span');s.textContent=w==='COFFEEMAKER'?'COFFEE MAKER':w;if(found.has(w))s.className='done';$('foundList').append(s)})}
+$('checkWordsearch').onclick=()=>{scores.ws=found.size;feedback('wsFeedback',found.size+'/10 words found · '+found.size+' points.',found.size===10);updateProgress()};
+const canData=[
+['She can plays the piano.','She can play the piano.'],
+['He can’t to drive a car.','He can’t drive a car.'],
+['They can speaks English.','They can speak English.'],
+['I can’t cooking pasta.','I can’t cook pasta.'],
+['My sister can dances very well.','My sister can dance very well.'],
+['The books are in the table.','The books are on the table.'],
+['The sofa is next the window.','The sofa is next to the window.']];
+function buildScrambles(id,data){data.forEach((q,i)=>{let d=document.createElement('div');d.className='question';d.innerHTML=`<div class="qtitle">Item ${i+1}</div><div class="scramble" style="background:#fff7ed;color:#9a3412">${q[0]}</div><input class="answer" autocomplete="off" data-answer="${q[1].toLowerCase()}" placeholder="Rewrite the sentence correctly...">`;$ (id).append(d)})}
+buildScrambles('canQuestions',canData);
+function checkText(id,feedbackId,key){let inputs=[...$(id).querySelectorAll('input')],score=0;inputs.forEach(x=>{let val=x.value.trim().toLowerCase().replace(/[’‘]/g,"'").replace(/[.!?]+$/,'').replace(/\s+/g,' '),ans=x.dataset.answer.replace(/[’‘]/g,"'").replace(/[.!?]+$/,'');let ok=val===ans;x.classList.toggle('correct',ok);x.classList.toggle('wrong',!ok);if(ok)score++});scores[key]=score;feedback(feedbackId,score+'/'+inputs.length+' correct · '+score+' points.',score===inputs.length);updateProgress()}
+$('checkCan').onclick=()=>checkText('canQuestions','canFeedback','can');
+const hobbies=[['🎸','play the guitar'],['🚗','drive a car'],['🏊','swim'],['🍳','cook'],['🎨','paint'],['⚽','play football'],['💃','dance'],['🚲','ride a bike']];
+let assignments={};function renderHobbies(){let bank=$('hobbyBank');bank.innerHTML='';bank.ondragover=e=>e.preventDefault();bank.ondrop=e=>e.preventDefault();bank.onpointerup=e=>{if(ghost){ghost.remove();ghost=null;let idx=Object.keys(assignments).find(k=>assignments[k]===dragWord);if(idx!==undefined)delete assignments[idx];dragWord=null;renderHobbies()}};let used=Object.values(assignments);hobbies.forEach((h,i)=>{if(used.includes(h[1]))return;let b=document.createElement('button');b.className='chip';b.textContent=h[1];b.dataset.word=h[1];bank.append(b);wireDrag(b)});$('hobbyGrid').innerHTML='';hobbies.forEach((h,i)=>{let d=document.createElement('div');d.className='hobby';d.innerHTML=`<span class="art">${h[0]}</span><div class="drop" data-slot="${i}">Drop a word here</div>`;let slot=d.querySelector('.drop');slot.addEventListener('pointerup',()=>{});wireDrop(slot,i);$('hobbyGrid').append(d)})}
+let dragWord=null,ghost=null;
+function wireDrag(el){el.addEventListener('pointerdown',e=>{dragWord=el.dataset.word;ghost=document.createElement('div');ghost.className='chip drag-ghost';ghost.textContent=dragWord;document.body.append(ghost);moveGhost(e);el.setPointerCapture(e.pointerId)});el.addEventListener('pointermove',e=>{if(ghost)moveGhost(e)});el.addEventListener('pointerup',e=>{if(!ghost)return;ghost.remove();ghost=null;let target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.drop');if(target){let idx=+target.dataset.slot;assignments[idx]=dragWord;renderHobbies()}dragWord=null});el.addEventListener('pointercancel',()=>{ghost?.remove();ghost=null;dragWord=null})}
+function moveGhost(e){ghost.style.left=e.clientX+'px';ghost.style.top=e.clientY+'px'}
+function wireDrop(slot,idx){slot.addEventListener('pointerdown',e=>{if(assignments[idx]){dragWord=assignments[idx];ghost=document.createElement('div');ghost.className='chip drag-ghost';ghost.textContent=dragWord;document.body.append(ghost);moveGhost(e);slot.setPointerCapture(e.pointerId)}});slot.addEventListener('pointermove',e=>{if(ghost)moveGhost(e)});slot.addEventListener('pointerup',e=>{if(!ghost)return;ghost.remove();ghost=null;let target=document.elementFromPoint(e.clientX,e.clientY);let newSlot=target?.closest('.drop');let bankTarget=target?.closest('#hobbyBank');let oldIdx=Object.keys(assignments).find(k=>assignments[k]===dragWord);if(oldIdx!==undefined)delete assignments[oldIdx];if(newSlot){assignments[+newSlot.dataset.slot]=dragWord}dragWord=null;renderHobbies()});slot.addEventListener('pointercancel',()=>{ghost?.remove();ghost=null;dragWord=null})}
+renderHobbies();
+$('checkHobbies').onclick=()=>{let score=0;hobbies.forEach((h,i)=>{let slot=document.querySelector(`.drop[data-slot="${i}"]`);let ok=assignments[i]===h[1];slot.classList.remove('correct','wrong');slot.classList.add(ok?'correct':'wrong');slot.textContent=assignments[i]||'No answer';if(ok)score++});scores.hobby=score;feedback('hobbyFeedback',score+'/8 correct · '+score+' points.',score===8);updateProgress()};
+const thereData=[
+['living room / a / there / sofa / the / in / is','There is a sofa in the living room.'],
+['bedroom / lamps / two / there / the / are / in','There are two lamps in the bedroom.'],
+['fridge / bedroom / there / a / the / in / isn’t','There isn’t a fridge in the bedroom.'],
+['chairs / kitchen / any / there / the / aren’t / in','There aren’t any chairs in the kitchen.'],
+['wardrobe / mirror / next to / a / there / the / is','There is a mirror next to the wardrobe.'],
+['table / books / some / the / on / there / are','There are some books on the table.'],
+['desk / coffee maker / there / a / the / on / isn’t','There isn’t a coffee maker on the desk.']];
+buildScrambles('thereQuestions',thereData);$('checkThere').onclick=()=>checkText('thereQuestions','thereFeedback','there');
+const listenText='Hello! My name is Alex. I live in a small house. There are two bedrooms and one bathroom. In the living room, there is a sofa next to the window. There is a television in front of the sofa. I can play the guitar, but I cannot play the piano. I can also cook, and I love making coffee. There is a coffee maker on the kitchen table.';
+const listenQs=[['How many bedrooms are there?',['One','Two','Three'],1],['Where is the sofa?',['Next to the window','Behind the door','Under the table'],0],['What is in front of the sofa?',['A fridge','A television','A wardrobe'],1],['What can Alex play?',['The piano','The drums','The guitar'],2],['Where is the coffee maker?',['On the kitchen table','Under the sofa','In the bedroom'],0]];
+listenQs.forEach((q,i)=>{let d=document.createElement('div');d.className='question';d.innerHTML=`<div class="qtitle">${i+1}. ${q[0]}</div>`+q[1].map((v,j)=>`<label class="option"><input type="radio" name="l${i}" value="${j}">${v}</label>`).join('');$('listenQuestions').append(d)});
+$('playAudio').onclick=()=>{if(!('speechSynthesis'in window)){alert('Audio playback is not supported in this browser.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(listenText);u.lang='en-GB';u.rate=.88;speechSynthesis.speak(u)};
+$('checkListen').onclick=()=>{let score=0;listenQs.forEach((q,i)=>{let chosen=document.querySelector(`input[name="l${i}"]:checked`);let labels=[...document.querySelectorAll(`input[name="l${i}"]`)].map(x=>x.parentElement);labels.forEach((l,j)=>{l.style.borderColor=j===q[2]?'#4ade80':(chosen&&+chosen.value===j?'#fca5a5':'');l.style.background=j===q[2]?'#f0fdf4':''});if(chosen&&+chosen.value===q[2])score++});scores.listen=score;feedback('listenFeedback',score+'/5 correct · '+score+' points.',score===5);updateProgress()};
+</script></body></html>
